@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Empower Project | MyPath</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fraunces:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --forest: #23361D;
+  --olive: #50692B;
+  --blue: #447CB3;
+  --lavender: #D4D8EC;
+  --gold: #BBB857;
+  --peach: #FCA47C;
+  --cream: #FFF9ED;
+  --cream-dark: #F0EADB;
+  --charcoal: #2C2C2C;
+  --charcoal-soft: #555;
+  --white: #FFFFFF;
+  --nav-bg: rgba(255, 249, 237, 0.94);
+  --card-bg: #FFFFFF;
+  --card-shadow: rgba(0,0,0,0.06);
+  --section-alt: #FFFFFF;
+  --border-subtle: rgba(80, 105, 43, 0.12);
+  --strip-bg: #23361D;
+  --footer-bg: #1A2A15;
+  --involve-1: rgba(80, 105, 43, 0.1);
+  --involve-2: rgba(68, 124, 179, 0.1);
+  --involve-3: rgba(252, 164, 124, 0.1);
+}
+
+[data-theme="dark"] {
+  --forest: #A8D4AE;
+  --olive: #8FC496;
+  --blue: #7CC4E8;
+  --lavender: rgba(212, 216, 236, 0.15);
+  --gold: #D4CC7A;
+  --peach: #FCA47C;
+  --cream: #4A6B50;
+  --cream-dark: #3D5A43;
+  --charcoal: #FFF9ED;
+  --charcoal-soft: #DDD7CA;
+  --white: #4A6B50;
+  --nav-bg: rgba(74, 107, 80, 0.94);
+  --card-bg: #3D5A43;
+  --card-shadow: rgba(0,0,0,0.2);
+  --section-alt: #2F4858;
+  --border-subtle: rgba(255, 249, 237, 0.12);
+  --strip-bg: #2E4633;
+  --footer-bg: #2C2C2C;
+  --involve-1: rgba(143, 196, 150, 0.18);
+  --involve-2: rgba(124, 196, 232, 0.18);
+  --involve-3: rgba(252, 164, 124, 0.18);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Nunito', sans-serif;
+  color: var(--charcoal);
+  background: var(--cream);
+  line-height: 1.7;
+  font-size: 17px;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4 { font-family: 'Fraunces', serif; line-height: 1.2; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* =================== TOP DONATE BAR =================== */
+.donate-bar {
+  background: var(--forest);
+  color: #FFFFFF;
+  text-align: center;
+  padding: 10px 24px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 101;
+}
+[data-theme="dark"] .donate-bar { background: #1E3340; color: #FFF9ED; }
+.donate-bar a {
+  color: var(--peach);
+  text-decoration: underline;
+  font-weight: 800;
+  margin-left: 6px;
+  transition: color 0.2s;
+}
+.donate-bar a:hover { color: var(--gold); }
+
+/* =================== NAV =================== */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: box-shadow 0.3s, background 0.4s;
+}
+nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px;
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; }
+.nav-logo img { height: 48px; width: auto; border-radius: 6px; }
+.nav-brand { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.1rem; color: var(--charcoal); }
+.nav-brand span { color: var(--olive); }
+.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+.nav-links a {
+  font-weight: 600; font-size: 0.9rem; color: var(--charcoal-soft);
+  transition: color 0.2s; letter-spacing: 0.02em;
+}
+.nav-links a:hover, .nav-links a:focus { color: var(--olive); }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-donate {
+  background: var(--peach); color: var(--forest); border: none;
+  padding: 10px 24px; border-radius: 100px; font-family: 'Nunito', sans-serif;
+  font-weight: 800; font-size: 0.9rem; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+[data-theme="dark"] .nav-donate { color: #23361D; }
+.nav-donate:hover { background: #fb8f5e; transform: translateY(-1px); }
+.nav-donate:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+/* Theme Toggle */
+.theme-toggle {
+  position: relative; width: 52px; height: 28px;
+  background: var(--cream-dark); border: 2px solid var(--border-subtle);
+  border-radius: 100px; cursor: pointer; padding: 0;
+  transition: background 0.4s, border-color 0.4s;
+  flex-shrink: 0;
+}
+.theme-toggle:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.theme-toggle-thumb {
+  position: absolute; left: 3px; top: 50%; transform: translateY(-50%);
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--olive);
+  transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+[data-theme="dark"] .theme-toggle-thumb { left: 27px; background: var(--peach); }
+.theme-toggle-icons {
+  display: flex; justify-content: space-between; align-items: center;
+  width: 100%; padding: 0 6px; pointer-events: none; font-size: 11px;
+}
+
+/* Mobile Toggle */
+.mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.mobile-toggle span {
+  display: block; width: 24px; height: 2.5px; background: var(--charcoal);
+  border-radius: 2px; margin: 5px 0; transition: transform 0.3s, opacity 0.3s;
+}
+.mobile-toggle.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.mobile-toggle.active span:nth-child(2) { opacity: 0; }
+.mobile-toggle.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* Mobile Menu */
+.mobile-menu { display: none; }
+@media (max-width: 768px) {
+  .mobile-menu {
+    display: block; position: fixed; top: 72px; left: 0; right: 0;
+    background: var(--nav-bg); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 16px 24px 24px; z-index: 99;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    transform: translateY(-10px); opacity: 0;
+    pointer-events: none; visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
+  }
+  .mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; visibility: visible; }
+}
+.mobile-menu ul { list-style: none; }
+.mobile-menu li { border-bottom: 1px solid var(--border-subtle); }
+.mobile-menu li:last-child { border-bottom: none; }
+.mobile-menu a {
+  display: block; padding: 16px 0; font-weight: 600; font-size: 1.05rem;
+  color: var(--charcoal); transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--olive); }
+.mobile-menu .mobile-cta {
+  display: block; text-align: center; margin-top: 16px;
+  background: var(--peach); color: #23361D; padding: 14px 24px;
+  border-radius: 100px; font-weight: 800; font-size: 1rem;
+  border: none; cursor: pointer; width: 100%;
+}
+
+/* Smooth transitions */
+body, nav, .mission-card, .program-card, .story-card, .involve-card,
+.impact-strip, .banner-cta, footer, .hero-badge, .value-tag {
+  transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+/* =================== HERO =================== */
+.hero {
+  position: relative; overflow: hidden;
+  padding: 80px 0 60px;
+  min-height: 85vh;
+  display: flex; align-items: center;
+}
+.hero-bg-img {
+  position: absolute; inset: 0; z-index: 0;
+}
+.hero-bg-img img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.hero-bg-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(35,54,29,0.88) 0%, rgba(35,54,29,0.7) 40%, rgba(68,124,179,0.4) 100%);
+}
+.hero .container { position: relative; z-index: 1; }
+.hero-grid {
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.12); color: var(--peach);
+  padding: 8px 20px; border-radius: 100px;
+  font-weight: 700; font-size: 0.82rem; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 24px;
+  backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.15);
+  animation: fadeUp 0.8s ease-out both;
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 900;
+  color: #FFFFFF; margin-bottom: 20px;
+  animation: fadeUp 0.8s ease-out 0.1s both;
+}
+.hero h1 em {
+  font-style: normal; color: var(--peach);
+}
+.hero-sub {
+  font-size: 1.15rem; color: rgba(255,255,255,0.88);
+  max-width: 520px; margin-bottom: 36px;
+  animation: fadeUp 0.8s ease-out 0.2s both;
+}
+.hero-actions {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  animation: fadeUp 0.8s ease-out 0.3s both;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--peach); color: #23361D;
+  padding: 16px 36px; border-radius: 100px;
+  font-family: 'Nunito', sans-serif; font-weight: 800;
+  font-size: 1.02rem; border: none; cursor: pointer;
+  transition: all 0.2s; box-shadow: 0 4px 16px rgba(252,164,124,0.3);
+}
+.btn-primary:hover { background: #fb8f5e; transform: translateY(-2px); }
+.btn-primary:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent; color: #FFFFFF;
+  padding: 16px 36px; border-radius: 100px;
+  font-family: 'Nunito', sans-serif; font-weight: 700;
+  font-size: 1.02rem; border: 2px solid rgba(255,255,255,0.5);
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
+.hero-image-stack {
+  position: relative; display: flex; justify-content: center;
+  animation: fadeUp 1s ease-out 0.4s both;
+}
+.hero-char {
+  border-radius: 20px; box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+  border: 4px solid rgba(255,255,255,0.15);
+}
+.hero-char-1 { width: 220px; position: relative; z-index: 2; transform: rotate(-3deg); }
+.hero-char-2 { width: 180px; position: absolute; right: 0; bottom: -20px; z-index: 1; transform: rotate(4deg); }
+.hero-char-3 { width: 160px; position: absolute; left: -10px; bottom: -40px; z-index: 0; transform: rotate(-6deg); opacity: 0.9; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =================== IMPACT STRIP =================== */
+.impact-strip {
+  background: var(--strip-bg); padding: 48px 0;
+  position: relative;
+}
+[data-theme="dark"] .impact-strip { background: #2E4633; }
+.impact-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+  text-align: center;
+}
+.impact-item h3 { font-size: 2.4rem; font-weight: 900; color: var(--peach); margin-bottom: 4px; }
+.impact-item p { color: rgba(255,255,255,0.85); font-weight: 600; font-size: 0.92rem; }
+
+/* =================== ABOUT / ORIGIN =================== */
+.about {
+  padding: 100px 0;
+  background: var(--cream);
+}
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+}
+.about-image {
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 12px 48px var(--card-shadow);
+  border: 3px solid var(--border-subtle);
+}
+.about-image img { width: 100%; height: 100%; object-fit: cover; }
+.section-label {
+  display: inline-block; font-weight: 800; font-size: 0.78rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 14px;
+}
+.about-text h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800;
+  margin-bottom: 20px;
+}
+.about-text h2 span { color: var(--olive); }
+.about-text p { color: var(--charcoal-soft); margin-bottom: 14px; font-size: 1rem; }
+.value-tags { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+.value-tag {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--lavender); padding: 8px 18px;
+  border-radius: 100px; font-weight: 700; font-size: 0.85rem;
+  color: var(--charcoal);
+}
+.value-tag::before { content: '✦'; color: var(--olive); font-size: 0.7rem; }
+
+/* =================== PROGRAMS =================== */
+.programs {
+  padding: 100px 0;
+  background: var(--section-alt);
+}
+[data-theme="dark"] .programs { background: #2F4858; }
+.section-header { text-align: center; margin-bottom: 56px; }
+.section-header h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; margin-bottom: 14px;
+}
+.section-header p { color: var(--charcoal-soft); max-width: 560px; margin: 0 auto; font-size: 1.02rem; }
+.programs-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+}
+.program-card {
+  background: var(--card-bg); border-radius: 16px; padding: 36px;
+  position: relative; overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.4s;
+  border: 1px solid var(--border-subtle);
+}
+.program-card:hover { transform: translateY(-4px); box-shadow: 0 12px 48px rgba(0,0,0,0.08); }
+.program-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+}
+.program-card:nth-child(1)::before { background: var(--olive); }
+.program-card:nth-child(2)::before { background: var(--blue); }
+.program-card:nth-child(3)::before { background: var(--peach); }
+.program-card:nth-child(4)::before { background: var(--gold); }
+.program-card:nth-child(5)::before { background: var(--forest); }
+.program-card:nth-child(6)::before { background: var(--blue); }
+[data-theme="dark"] .program-card:nth-child(1) { background: #3E5543; }
+[data-theme="dark"] .program-card:nth-child(2) { background: #2E4A5A; }
+[data-theme="dark"] .program-card:nth-child(3) { background: #4E4535; }
+[data-theme="dark"] .program-card:nth-child(4) { background: #4A4A38; }
+[data-theme="dark"] .program-card:nth-child(5) { background: #3A4E3E; }
+[data-theme="dark"] .program-card:nth-child(6) { background: #354D58; }
+.program-icon {
+  width: 56px; height: 56px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; margin-bottom: 16px;
+}
+.program-card:nth-child(1) .program-icon { background: rgba(80,105,43,0.12); }
+.program-card:nth-child(2) .program-icon { background: rgba(68,124,179,0.12); }
+.program-card:nth-child(3) .program-icon { background: rgba(252,164,124,0.12); }
+.program-card:nth-child(4) .program-icon { background: rgba(187,184,87,0.12); }
+.program-card:nth-child(5) .program-icon { background: rgba(35,54,29,0.12); }
+.program-card:nth-child(6) .program-icon { background: rgba(68,124,179,0.12); }
+.program-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+.program-card p { color: var(--charcoal-soft); font-size: 0.92rem; line-height: 1.7; }
+
+/* =================== IMAGE FEATURE ROW =================== */
+.feature-row {
+  padding: 80px 0;
+  background: var(--cream);
+}
+.feature-images {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.feature-img {
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 8px 32px var(--card-shadow);
+  aspect-ratio: 16/10;
+}
+.feature-img img { width: 100%; height: 100%; object-fit: cover; }
+
+/* =================== PARTNERS =================== */
+.partners {
+  padding: 80px 0;
+  background: var(--section-alt);
+}
+[data-theme="dark"] .partners { background: #344E5C; }
+.partner-logos {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 32px;
+  margin-top: 12px;
+}
+.partner-pill {
+  background: var(--card-bg); padding: 14px 28px;
+  border-radius: 100px; font-weight: 700; font-size: 0.95rem;
+  color: var(--charcoal); box-shadow: 0 2px 12px var(--card-shadow);
+  border: 1px solid var(--border-subtle);
+  transition: transform 0.2s;
+}
+.partner-pill:hover { transform: translateY(-2px); }
+
+/* =================== STORIES =================== */
+.stories {
+  padding: 100px 0;
+  background: var(--cream);
+}
+[data-theme="dark"] .stories { background: #344E5C; }
+.stories-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.story-card {
+  background: var(--card-bg); border-radius: 16px; padding: 36px;
+  box-shadow: 0 4px 20px var(--card-shadow);
+  transition: transform 0.3s, background 0.4s;
+}
+.story-card:hover { transform: translateY(-3px); }
+[data-theme="dark"] .story-card:nth-child(1) { background: #3E5543; }
+[data-theme="dark"] .story-card:nth-child(2) { background: #4E4535; }
+[data-theme="dark"] .story-card:nth-child(3) { background: #2E4A5A; }
+.story-quote { font-family: 'Fraunces', serif; font-size: 4rem; color: var(--lavender); line-height: 1; margin-bottom: -16px; }
+[data-theme="dark"] .story-quote { color: rgba(255,249,237,0.15); }
+.story-card p { font-size: 0.95rem; color: var(--charcoal-soft); line-height: 1.8; margin-bottom: 20px; font-style: italic; }
+.story-author { display: flex; align-items: center; gap: 12px; }
+.story-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+}
+.story-card:nth-child(1) .story-avatar { background: rgba(80,105,43,0.15); }
+.story-card:nth-child(2) .story-avatar { background: rgba(252,164,124,0.15); }
+.story-card:nth-child(3) .story-avatar { background: rgba(68,124,179,0.15); }
+.story-author-info strong { display: block; font-size: 0.92rem; }
+.story-author-info span { font-size: 0.8rem; color: var(--charcoal-soft); }
+
+/* =================== VISION / BIG IMAGE =================== */
+.vision {
+  padding: 100px 0;
+  background: var(--strip-bg);
+  position: relative;
+  overflow: hidden;
+}
+[data-theme="dark"] .vision { background: #1E3340; }
+.vision-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+}
+.vision-text .section-label { color: var(--peach); }
+.vision-text h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); color: #FFFFFF; margin-bottom: 20px; }
+.vision-text p { color: rgba(255,255,255,0.8); margin-bottom: 14px; font-size: 1rem; }
+.vision-list { list-style: none; margin-top: 24px; }
+.vision-list li {
+  padding: 10px 0; color: rgba(255,255,255,0.85); font-weight: 600;
+  display: flex; align-items: flex-start; gap: 10px; font-size: 0.95rem;
+}
+.vision-list li::before { content: '→'; color: var(--peach); font-weight: 800; flex-shrink: 0; margin-top: 2px; }
+.vision-image { border-radius: 20px; overflow: hidden; box-shadow: 0 16px 56px rgba(0,0,0,0.3); }
+.vision-image img { width: 100%; }
+
+/* =================== GET INVOLVED =================== */
+.get-involved {
+  padding: 100px 0;
+  background: var(--section-alt);
+}
+[data-theme="dark"] .get-involved { background: #2C3E4A; }
+.involve-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.involve-card {
+  text-align: center; padding: 44px 28px;
+  border-radius: 16px; border: 2px solid transparent;
+  transition: all 0.3s;
+}
+.involve-card:nth-child(1) { background: var(--involve-1); border-color: var(--border-subtle); }
+.involve-card:nth-child(2) { background: var(--involve-2); border-color: var(--border-subtle); }
+.involve-card:nth-child(3) { background: var(--involve-3); border-color: var(--border-subtle); }
+.involve-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
+.involve-icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; background: var(--card-bg);
+  box-shadow: 0 4px 16px var(--card-shadow);
+}
+.involve-card h3 { font-size: 1.3rem; margin-bottom: 10px; }
+.involve-card p { font-size: 0.92rem; color: var(--charcoal-soft); margin-bottom: 20px; line-height: 1.7; }
+.involve-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px; border-radius: 100px;
+  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.92rem;
+  border: 2px solid var(--charcoal); color: var(--charcoal);
+  background: transparent; cursor: pointer; transition: all 0.2s;
+}
+.involve-btn:hover { background: var(--charcoal); color: var(--cream); }
+
+/* =================== LOGO SHOWCASE =================== */
+.logo-showcase {
+  padding: 80px 0;
+  background: var(--cream);
+  text-align: center;
+}
+.logo-showcase img {
+  max-width: 600px; margin: 0 auto; border-radius: 16px;
+}
+
+/* =================== BANNER CTA =================== */
+.banner-cta {
+  padding: 80px 0;
+  background: var(--strip-bg); text-align: center;
+  position: relative; overflow: hidden;
+}
+[data-theme="dark"] .banner-cta { background: #1E3340; }
+.banner-cta h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: #FFFFFF; margin-bottom: 14px; }
+.banner-cta p { color: rgba(255,255,255,0.85); font-size: 1.1rem; max-width: 520px; margin: 0 auto 32px; }
+
+/* =================== FOOTER =================== */
+footer {
+  background: var(--footer-bg); color: rgba(255,255,255,0.7); padding: 72px 0 36px;
+}
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+.footer-brand h3 { font-size: 1.2rem; color: #FFFFFF; margin-bottom: 14px; }
+.footer-brand p { font-size: 0.9rem; line-height: 1.7; max-width: 300px; }
+.footer-col h4 {
+  color: #FFFFFF; font-family: 'Nunito', sans-serif;
+  font-weight: 800; font-size: 0.82rem; letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 18px;
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a { font-size: 0.9rem; transition: color 0.2s; }
+.footer-col a:hover { color: var(--peach); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.82rem;
+}
+.footer-bottom a:hover { color: var(--peach); }
+
+/* =================== ACCESSIBILITY =================== */
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+.skip-link {
+  position: fixed; top: -100%; left: 50%; transform: translateX(-50%);
+  background: #2C2C2C; color: #FFFFFF;
+  padding: 12px 24px; border-radius: 0 0 8px 8px;
+  font-weight: 700; z-index: 9999; transition: top 0.3s;
+}
+.skip-link:focus { top: 0; }
+
+/* =================== ANIMATIONS =================== */
+.fade-section { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+.fade-section.visible { opacity: 1; transform: translateY(0); }
+
+/* =================== RESPONSIVE =================== */
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; text-align: center; }
+  .hero-sub { margin-left: auto; margin-right: auto; }
+  .hero-actions { justify-content: center; }
+  .hero-image-stack { margin-top: 40px; }
+  .about-grid, .vision-grid { grid-template-columns: 1fr; gap: 40px; }
+  .programs-grid { grid-template-columns: 1fr 1fr; }
+  .stories-grid { grid-template-columns: 1fr; }
+  .involve-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .feature-images { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links, .nav-donate { display: none; }
+  .mobile-toggle { display: block; }
+  .donate-bar { font-size: 0.8rem; }
+  .hero { padding: 60px 0 40px; min-height: auto; }
+  .hero h1 { font-size: 2rem; }
+  .hero-char-1 { width: 160px; }
+  .hero-char-2 { width: 130px; }
+  .hero-char-3 { width: 110px; }
+  .impact-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .programs-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .fade-section { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- DONATE BAR -->
+<div class="donate-bar">
+  Help us empower communities across Minnesota.<a href="#involved">Donate Today →</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="The Empower Project - Home">
+      <img src="logo-transparent.png" alt="MyPath Logo">
+      <span class="nav-brand">The <span>Empower Project</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">Our Story</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#stories">Impact</a></li>
+      <li><a href="#vision">Vision</a></li>
+      <li><a href="#involved">Get Involved</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-donate">Donate</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" role="switch" aria-checked="false">
+        <span class="theme-toggle-icons" aria-hidden="true"><span>☀️</span><span>🌙</span></span>
+        <span class="theme-toggle-thumb"></span>
+      </button>
+      <button class="mobile-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+  <ul>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#stories">Impact</a></li>
+    <li><a href="#vision">Vision</a></li>
+    <li><a href="#involved">Get Involved</a></li>
+  </ul>
+  <button class="mobile-cta">Donate</button>
+</div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" aria-label="Welcome">
+  <div class="hero-bg-img" aria-hidden="true">
+    <img src="hero-path.png" alt="">
+  </div>
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">Minnesota Non-Profit · Est. 2021</div>
+        <h1>Empowering Every Individual to <em>Thrive</em></h1>
+        <p class="hero-sub">We provide personalized life coaching and career support for people of all abilities — helping individuals with disabilities and underserved communities build purpose, independence, and&nbsp;fulfillment.</p>
+        <div class="hero-actions">
+          <button class="btn-primary">Explore Our Programs <span aria-hidden="true">→</span></button>
+          <button class="btn-outline">Our Story</button>
+        </div>
+      </div>
+      <div class="hero-image-stack">
+        <img src="wheelchair-boy.png" alt="Smiling young man in wheelchair" class="hero-char hero-char-1">
+        <img src="inclusive-girl.png" alt="Young woman standing confidently" class="hero-char hero-char-2">
+        <img src="wheelchair-girl.png" alt="Young woman in wheelchair smiling" class="hero-char hero-char-3">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT STRIP -->
+<section class="impact-strip fade-section" aria-label="Impact">
+  <div class="container">
+    <div class="impact-grid">
+      <div class="impact-item"><h3>300+</h3><p>Individuals Served</p></div>
+      <div class="impact-item"><h3>50</h3><p>Team Members Strong</p></div>
+      <div class="impact-item"><h3>12</h3><p>Metro Counties Reached</p></div>
+      <div class="impact-item"><h3>2023</h3><p>MN Provider of the Year</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about fade-section" id="about" aria-label="Our Story">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image">
+        <img src="vrs-meeting.png" alt="Team of coaches collaborating at a table">
+      </div>
+      <div class="about-text">
+        <span class="section-label">Our Story</span>
+        <h2>From one coach to a <span>movement of fifty</span></h2>
+        <p>The Empower Project began in January 2021 with a single staff member and a bold vision: that every person — regardless of ability, background, or circumstance — deserves the chance to lead a meaningful life and rewarding career.</p>
+        <p>Today we've grown to 50 employees supporting over 300 individuals across 12 metro area counties. We're accredited by the Commission on Accreditation of Rehabilitation Facilities (CARF), hold a 245D license in multiple categories, and were named "Community Transition Provider of the Year" by the MN Rehabilitation Association in 2023.</p>
+        <div class="value-tags">
+          <span class="value-tag">Individualized Approach</span>
+          <span class="value-tag">Compassion</span>
+          <span class="value-tag">Inclusivity</span>
+          <span class="value-tag">Ability-Focused</span>
+          <span class="value-tag">Relationship-Centered</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="programs fade-section" id="programs" aria-label="Programs">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Programs & Services</span>
+      <h2>Tailored Support for Every Step</h2>
+      <p>A continuum of services designed to meet you where you are and guide you toward where you want to&nbsp;be.</p>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card">
+        <div class="program-icon">🧭</div>
+        <h3>Career Exploration & Coaching</h3>
+        <p>One-on-one career guidance including resume building, interview preparation, job placement, and ongoing workplace mentorship through our employer&nbsp;partnerships.</p>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">🎓</div>
+        <h3>Education & Training Prep</h3>
+        <p>Post-secondary education preparation, IT certification pathways, cashier training, and art-based skill development — all tailored to individual goals and&nbsp;interests.</p>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">💼</div>
+        <h3>Workplace Readiness</h3>
+        <p>Pre-employment skills training, 8–12 week paid work experiences with partner companies, and on-the-job support that often leads to permanent&nbsp;employment.</p>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">🏡</div>
+        <h3>Independent Living Skills</h3>
+        <p>Practical workshops on financial literacy, daily living, communication, self-advocacy, and community navigation — personalized plans that meet you exactly where you&nbsp;are.</p>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">🎲</div>
+        <h3>Social Skills & Community</h3>
+        <p>Creative engagement opportunities including our Dungeons & Dragons social skills group, community workshops, and inclusive activities designed to build confidence and&nbsp;connection.</p>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">🏢</div>
+        <h3>Employer Training & Consulting</h3>
+        <p>We help businesses develop inclusive hiring programs, attract diverse talent, and build workplace cultures where every team member can contribute and&nbsp;thrive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE IMAGES -->
+<section class="feature-row fade-section" aria-label="Gallery">
+  <div class="container">
+    <div class="feature-images">
+      <div class="feature-img"><img src="team-meeting.png" alt="Diverse team working together"></div>
+      <div class="feature-img"><img src="couch-group.png" alt="Community group in conversation"></div>
+      <div class="feature-img"><img src="table-convo.png" alt="Small group coaching session"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="partners fade-section" aria-label="Partners">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Our Partners</span>
+      <h2>Building Bridges to Employment</h2>
+      <p>We partner with local businesses to provide work experience, job shadowing, informational interviews, and workplace tours.</p>
+    </div>
+    <div class="partner-logos">
+      <span class="partner-pill">Walgreens</span>
+      <span class="partner-pill">Hy-Vee</span>
+      <span class="partner-pill">Coborn's</span>
+      <span class="partner-pill">Caribou Coffee</span>
+      <span class="partner-pill">Fanatics</span>
+      <span class="partner-pill">YMCA</span>
+      <span class="partner-pill">TJ Maxx</span>
+      <span class="partner-pill">+ Many More</span>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section class="stories fade-section" id="stories" aria-label="Impact Stories">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Impact Stories</span>
+      <h2>Journeys That Inspire</h2>
+      <p>Real stories of people who found purpose, community, and fulfillment through our&nbsp;programs.</p>
+    </div>
+    <div class="stories-grid">
+      <div class="story-card">
+        <div class="story-quote" aria-hidden="true">"</div>
+        <p>They didn't just help me find a job — they helped me discover what I was capable of. Now I wake up every day excited to go to work and contribute to my&nbsp;team.</p>
+        <div class="story-author">
+          <div class="story-avatar">🌟</div>
+          <div class="story-author-info"><strong>Marcus T.</strong><span>Work Experience Graduate</span></div>
+        </div>
+      </div>
+      <div class="story-card">
+        <div class="story-quote" aria-hidden="true">"</div>
+        <p>The independent living workshops gave my daughter skills she uses every single day. Watching her gain confidence and self-sufficiency has been the greatest gift our family could ask&nbsp;for.</p>
+        <div class="story-author">
+          <div class="story-avatar">💛</div>
+          <div class="story-author-info"><strong>Jennifer R.</strong><span>Parent & Advocate</span></div>
+        </div>
+      </div>
+      <div class="story-card">
+        <div class="story-quote" aria-hidden="true">"</div>
+        <p>As an employer partner, we've seen firsthand how The Empower Project prepares people to succeed. Their candidates are motivated, supported, and ready to contribute from day&nbsp;one.</p>
+        <div class="story-author">
+          <div class="story-avatar">🏢</div>
+          <div class="story-author-info"><strong>David K.</strong><span>HR Director, Partner Company</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section class="vision fade-section" id="vision" aria-label="Our Vision">
+  <div class="container">
+    <div class="vision-grid">
+      <div class="vision-text">
+        <span class="section-label">Our Vision</span>
+        <h2>A future where everyone who wants to work finds meaningful&nbsp;employment</h2>
+        <p>The Empower Project was created to serve a wider range of individuals — not just those eligible for traditional VRS services — and open new doors to skills, experience, and lasting&nbsp;employment.</p>
+        <ul class="vision-list">
+          <li>Every individual finds competitive, meaningful employment regardless of background</li>
+          <li>Employers recognize and value the diverse talents they might otherwise overlook</li>
+          <li>Individuals achieve self-sufficiency and become active, contributing community members</li>
+          <li>Communities see the benefit of investing in every person's potential</li>
+        </ul>
+      </div>
+      <div class="vision-image">
+        <img src="diverse-group.png" alt="Diverse group of young adults together">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GET INVOLVED -->
+<section class="get-involved fade-section" id="involved" aria-label="Get Involved">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Get Involved</span>
+      <h2>Be Part of the Journey</h2>
+      <p>Every act of support creates real opportunity in our&nbsp;community.</p>
+    </div>
+    <div class="involve-grid">
+      <div class="involve-card">
+        <div class="involve-icon">🙋</div>
+        <h3>Volunteer</h3>
+        <p>Mentor a participant, lead a workshop, or help at events. Your time makes a direct impact on someone's&nbsp;journey.</p>
+        <button class="involve-btn">Join Us →</button>
+      </div>
+      <div class="involve-card">
+        <div class="involve-icon">💝</div>
+        <h3>Donate</h3>
+        <p>Your contribution funds scholarships, program materials, and the individualized support that makes this work&nbsp;possible.</p>
+        <button class="involve-btn">Give Today →</button>
+      </div>
+      <div class="involve-card">
+        <div class="involve-icon">🤝</div>
+        <h3>Partner</h3>
+        <p>Businesses and organizations — let's build inclusive employment together. Hire, host, or collaborate with&nbsp;us.</p>
+        <button class="involve-btn">Connect →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO SHOWCASE -->
+<section class="logo-showcase fade-section" aria-label="Logo">
+  <div class="container">
+    <img src="logo.png" alt="MyPath - The Empower Project logo with heart-shaped tree">
+  </div>
+</section>
+
+<!-- BANNER CTA -->
+<section class="banner-cta fade-section" aria-label="Call to action">
+  <div class="container">
+    <h2>Everyone Deserves a Chance to Thrive</h2>
+    <p>Whether you're seeking support, looking to volunteer, or ready to partner — we'd love to hear from&nbsp;you.</p>
+    <button class="btn-primary">Get Started Today →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>The Empower Project</h3>
+        <p>Empowering underserved individuals and under-represented communities to achieve personal and professional goals through person-centered training and&nbsp;support.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="#">Career Coaching</a></li>
+          <li><a href="#">Education & Training</a></li>
+          <li><a href="#">Life Skills</a></li>
+          <li><a href="#">Employer Consulting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="#">Partners</a></li>
+          <li><a href="#">CARF Accreditation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li>Minnesota Metro Area</li>
+          <li><a href="mailto:hello@mypathempower.org">hello@mypathempower.org</a></li>
+          <li><a href="tel:+13205551234">(320) 555-1234</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 MyPath: The Empower Project. All rights reserved.</span>
+      <div><a href="#">Privacy Policy</a> · <a href="#">Terms</a> · <a href="#">Accessibility</a></div>
+    </div>
+  </div>
+</footer>
+</main>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
+
+// Fade on scroll
+const faders = document.querySelectorAll('.fade-section');
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+faders.forEach(el => fadeObs.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const t = document.querySelector(link.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+const saved = localStorage.getItem('theme');
+function setTheme(dark) {
+  html.setAttribute('data-theme', dark ? 'dark' : 'light');
+  themeToggle.setAttribute('aria-checked', dark);
+  themeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+}
+if (saved === 'dark') setTheme(true);
+themeToggle.addEventListener('click', () => setTheme(html.getAttribute('data-theme') !== 'dark'));
+
+// Mobile menu
+const mobileToggle = document.querySelector('.mobile-toggle');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+function toggleMenu(open) {
+  menuOpen = typeof open === 'boolean' ? open : !menuOpen;
+  mobileToggle.classList.toggle('active', menuOpen);
+  mobileToggle.setAttribute('aria-expanded', menuOpen);
+  mobileMenu.classList.toggle('open', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
+mobileToggle.addEventListener('click', () => toggleMenu());
+mobileMenu.querySelectorAll('a, .mobile-cta').forEach(l => l.addEventListener('click', () => toggleMenu(false)));
+window.addEventListener('resize', () => { if (window.innerWidth > 768 && menuOpen) toggleMenu(false); });
+</script>
+</body>
+</html>
